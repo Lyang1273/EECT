@@ -72,6 +72,18 @@ try:
             threaded=True,  # 启用后台线程
             icon_path="./img/EECT_logo.ico"
         )
+    elif ud_info[0] == "error":
+        # 初始化通知对象
+        toaster = win10toast.ToastNotifier()
+
+        # 发送基础通知
+        toaster.show_toast(
+            title="EECT更新 - 更新检查失败",
+            msg=f"{traceback.format_exc()}",
+            duration=10,  # 显示时长（秒）
+            threaded=True,  # 启用后台线程
+            icon_path="./img/EECT_logo.ico"
+        )
 except Exception as e:
     # 初始化通知对象
     toaster = win10toast.ToastNotifier()

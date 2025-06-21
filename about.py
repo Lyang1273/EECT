@@ -1,7 +1,7 @@
 import maliang
 import webbrowser
 import update
-from tkinter import messagebox
+from maliang import standard
 from loguru import logger
 
 
@@ -97,15 +97,24 @@ def free_software_statement(window):
 
 def pull_up_the_update():
     logger.info("调用 pull_up_the_update 函数")
-    ud = update.update()
-    if ud[0]:
-        logger.info("检测到新版本")
-        compare = "有可用更新！"
-    else:
-        logger.info("当前已是最新版本")
-        compare = "当前已是最新版本！"
-    messagebox.showinfo("EECT update", f"{compare}\n\n当前版本：{update.check_version(1)}\n版本码：{update.check_version(0)}              \n\n最新版本：{ud[1]}\n版本码：{ud[2]}\n发布日期：{ud[3]}\n更新日志：{ud[4]}\n重要程度：{ud[5]}")
+    try:
+        ud = update.update()
+        if ud[0]:
+            logger.info("检测到新版本")
+            compare = "有可用更新！"
+        elif ud[0] == "error":
+            logger.error("检查更新时出错")
+            udERR = update.check_update()
 
+            standard.TkMessage("检查更新失败", f"HTTP状态码：{udERR[1]}\n\n堆栈信息：\n{udERR[2]}\n\n获得的原始数据：\n{udERR[3]}", icon="error")
+            return
+        else:
+            logger.info("当前已是最新版本")
+            compare = "当前已是最新版本！"
+        standard.TkMessage("EECT update", f"{compare}\n\n当前版本：{update.check_version(1)}\n版本码：{update.check_version(0)}              \n\n最新版本：{ud[1]}\n版本码：{ud[2]}\n发布日期：{ud[3]}\n更新日志：{ud[4]}\n重要程度：{ud[5]}")
+    except Exception as e:
+        standard.TkMessage("检查更新失败", f"详细信息：\n{e}", icon="error", option="retrycancel", default="cancel", command=lambda result: pull_up_the_update() if result == "retry" else None)
+        return
 
 def update_window(window):
     new_version, new_version_code, date, changelog, importance = "--", "--", "--", "--", "--"

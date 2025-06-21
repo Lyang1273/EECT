@@ -5,6 +5,7 @@ import zipfile
 import requests
 from loguru import logger
 from packaging import version
+from tkinter import messagebox
 
 
 # 获取更新配置
@@ -45,21 +46,8 @@ def check_update():
             url = data['download_url']
             return new_version, version_code, date, changelog, importance, zip_name, url
         except Exception:
-            logger.error(
-                f"解析数据时出错。HTTP状态码：{response.status_code}\n\n堆栈信息：\n{traceback.format_exc()}\n\n获得的原始数据：\n{response.text}")
-            print(
-                f"解析数据时出错。HTTP状态码：{response.status_code}\n\n堆栈信息：\n{traceback.format_exc()}\n\n获得的原始数据：\n{response.text}")
-            logger.info("使用本地数据")
-            with open('./config/update.toml', 'rb') as f:
-                update_data = tomllib.load(f)
-                new_version = update_data['version']
-                version_code = update_data['version_code']
-                date = update_data['date']
-                changelog = update_data['changelog']
-                importance = update_data['importance']
-                zip_name = update_data['file_name']
-                url = update_data['download_url']
-                return new_version, version_code, date, changelog, importance, zip_name, url
+            logger.error(f"解析数据时出错。HTTP状态码：{response.status_code}\n\n堆栈信息：\n{traceback.format_exc()}\n\n获得的原始数据：\n{response.text}")
+            return f"HTTP状态码：{response.status_code}", 0, 0, 0, 0, 0, url
 
     else:
         logger.info("使用Beta版更新通道")
@@ -127,20 +115,22 @@ def update():
     new_version, version_code, date, changelog, importance, zip_name, url = check_update()
     if new_version is None:
         return False  # 如果没有更新，则返回False
-
-    # 显示更新信息
-    print(f"新版本: {new_version}")
-    print(f"版本号: {version_code}")
-    print(f"发布日期: {date}")
-    print(f"更新日志: {changelog}")
-    print(f"重要性: {importance}")
-    print(f"下载链接: {url}")
-    print(f"文件名: {zip_name}")
-    compare_ver = compare_versions(check_version(1), new_version)
-    print("对比版本号", compare_ver)
-    logger.info("版本信息：\n最新版本：%s\n版本号：%s\n发布日期：%s\n更新日志：%s\n重要性：%s\n下载链接：%s\n文件名：%s" % (
-    new_version, version_code, date, changelog, importance, url, zip_name))
-    return compare_ver, new_version, version_code, date, changelog, importance, zip_name, url
+    elif new_version == -1:
+        compare_ver = "error"
+        return compare_ver, new_version, version_code, date, changelog, importance, zip_name, url
+    else:
+        # 显示更新信息
+        print(f"新版本: {new_version}")
+        print(f"版本号: {version_code}")
+        print(f"发布日期: {date}")
+        print(f"更新日志: {changelog}")
+        print(f"重要性: {importance}")
+        print(f"下载链接: {url}")
+        print(f"文件名: {zip_name}")
+        compare_ver = compare_versions(check_version(1), new_version)
+        print("对比版本号", compare_ver)
+        logger.info("版本信息：\n最新版本：%s\n版本号：%s\n发布日期：%s\n更新日志：%s\n重要性：%s\n下载链接：%s\n文件名：%s" % (new_version, version_code, date, changelog, importance, url, zip_name))
+        return compare_ver, new_version, version_code, date, changelog, importance, zip_name, url
 
 
 def unzip_file(zip_path, extract_to):
