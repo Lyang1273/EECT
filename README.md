@@ -1,7 +1,7 @@
 <p><a target="_blank" href="https://app.eraser.io/workspace/JLMQfONupwbjFZZOMGp1" id="edit-in-eraser-github-link"><img alt="Edit in Eraser" src="https://firebasestorage.googleapis.com/v0/b/second-petal-295822.appspot.com/o/images%2Fgithub%2FOpen%20in%20Eraser.svg?alt=media&amp;token=968381c8-a7e7-472a-8ed6-4a6626da5501"></a></p>
 
 > [!WARNING]  
-**开发恢复通知：** 考试已经考完啦，可以恢复正常开发进度了🎉🎉🎉。
+**版本命名规则改变** 今后EECT的版本号将从13开始。
 
 #  Electrical Education Commission Toolbox 电教工具箱 
  简洁、易用的电教委工具。 
