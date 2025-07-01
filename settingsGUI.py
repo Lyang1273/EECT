@@ -22,9 +22,9 @@ def menu_controls(value, cv, cv2=None):
             settings_storage(cv)
         case 3:
             update_settingsGUI.settings_main(cv)
-        case 4:
+        case 44:
             setting_extend(cv)
-        case 5:
+        case 4:
             settings_experimental(cv)
 
 
@@ -58,7 +58,7 @@ def main_window(window=0, top=None):
 
 
 def menu_bar(cv, cv2, default_=0):
-    menu = maliang.SegmentedButton(cv, (0, 0), text=("主页    ", "外观    ", "存储    ", "更新    ", "扩展    ", "实验性 "), layout="vertical", default=default_, command=lambda i: menu_controls(menu.get(), cv2, cv))
+    menu = maliang.SegmentedButton(cv, (0, 0), text=("主页    ", "外观    ", "存储    ", "更新    ", "实验性 "), layout="vertical", default=default_, command=lambda i: menu_controls(menu.get(), cv2, cv))
 
 
 def settings_home(cv):
@@ -85,7 +85,7 @@ def settings_appearance(cv, cv2):
     title = maliang.Text(cv, (20, 20), text="外观设置", fontsize=26)
     color_mode_text = maliang.Text(cv, (20, 90), text="设置颜色模式")
     color_mode = maliang.SegmentedButton(cv, (20, 130), text=("跟随系统", "深色", "浅色"), default=int(settings.get_value("appearance.color_mode")), command=lambda i: settings.set_color_mode(color_mode.get()))
-    maliang.UnderlineButton(cv, (20, 300), text="相关设置\n在标题栏上显示名人名言 >", command=lambda: [menu_bar(cv2, cv, 5), settings_experimental(cv)])
+    maliang.UnderlineButton(cv, (20, 300), text="相关设置\n在标题栏上显示名人名言 >", command=lambda: [menu_bar(cv2, cv, 4), settings_experimental(cv)])
 
 
 def settings_storage(cv):

@@ -2,8 +2,6 @@ import maliang
 from maliang import animation, theme
 from loguru import logger
 import os
-import random
-import tomllib
 import webbrowser
 
 import shutdown
@@ -14,10 +12,15 @@ from update import check_version
 import about
 import dialog
 import core
+import software_rec
+
+SWREC = software_rec.Main()
+
 
 try:
     import corelib
     Language = corelib.Language()
+    Vote = corelib.Vote()
 
 except Exception:
     pass
@@ -33,6 +36,8 @@ def menu_controls(value, cv):
             taskbar(cv)
         case 3:
             system_info(cv)
+        case 4:
+            software_REC(cv)
 
 
 def main_window():
@@ -57,7 +62,7 @@ def main_window():
 
 
 def menu_bar(cv, cv2, window):
-    menu = maliang.SegmentedButton(cv, (0, 0), text=("定时关机               ", "Windows 工具      ", "修改任务栏            ", "系统信息               "), layout="vertical", default=0, command=lambda i:menu_controls(menu.get(), cv2))
+    menu = maliang.SegmentedButton(cv, (0, 0), text=("定时关机               ", "Windows 工具      ", "修改任务栏            ", "系统信息               ", "软件推荐               "), layout="vertical", default=0, command=lambda i: menu_controls(menu.get(), cv2))
     about_button = maliang.Button(cv, (0, 358), text="            关于            ", command=lambda: About(cv2))
     settings_button = maliang.Button(cv, (0, 400), text="            设置            ", command=lambda: settingsGUI.main_window(1, window))
 
@@ -158,6 +163,30 @@ def system_info(cv):
     cpu = maliang.Text(cv, (20, 100), text=f"CPU: {core.cpu_info()[0]}\n        {core.cpu_info()[1]}核{core.cpu_info()[2]}线程", fontsize=16)
     RAM = maliang.Text(cv, (20, 160), text=f"运行内存: {core.RAM_info():.1f}GB", fontsize=16)
     display = maliang.Text(cv, (20, 200), text=f"当前使用分辨率: {core.display_info()}", fontsize=16)
+
+
+def vote(cv):
+    logger.info("投票器")
+    cv.clear()
+
+    cv.place(width=650, height=450, x=200, y=40)
+    animation.MoveTkWidget(cv, (0, -40), 200, fps=60).start(delay=50)
+
+    add_a_item = maliang.Button(cv, (20, 10), text="+  添加项")
+    output = maliang.Button(cv, (140, 10), text="→ 导出")
+
+    Vote.new_item(cv, 1, (20, 80))
+
+
+def software_REC(cv):
+    logger.info("软件推荐")
+    cv.clear()
+
+    cv.place(width=650, height=450, x=200, y=40)
+    animation.MoveTkWidget(cv, (0, -40), 200, fps=60).start(delay=50)
+
+    maliang.Text(cv, (20, 20), text="选择来源", fontsize=26)
+    from_AIWB = maliang.IconButton(cv, (20, 60), text="从AIWB获取", image=maliang.PhotoImage(file="./img/SoftWareREC/AIWB/aiwb_logo.png").resize(30, 24), command=lambda: SWREC.AIWB(cv))
 
 
 if __name__ == "__main__":
