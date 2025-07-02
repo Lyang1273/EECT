@@ -64,7 +64,7 @@ jobs:
           config=config
         enable-plugins: tk-inter
         windows-console-mode: attach
-        nofollow-import-to: core, GUI, about, FindGames, err, shutdown, reg, settings, dialog, settingsGUI, update, update_settingsGUI, update_settings
+        nofollow-import-to: core, GUI, about, FindGames, err, shutdown, reg, settings, dialog, settingsGUI, update, update_settingsGUI, update_settings, corelib
         product-name: EECT
         product-version: 1
         file-description: EECT主程序

@@ -16,11 +16,11 @@ import GUI
 import err
 
 _logs_path = "./logs"
-build = 250613.1
+build = 250701.1
 
 
 def version():
-    return 1
+    return 13
 
 
 def build_version():

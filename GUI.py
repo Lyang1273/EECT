@@ -13,9 +13,10 @@ import about
 import dialog
 import core
 import software_rec
+import corelib
 
 SWREC = software_rec.Main()
-
+EGGHUNT = corelib.EggHunt()
 
 try:
     import corelib
@@ -76,7 +77,7 @@ def About(cv):
     
     # EECT_logo = maliang.Image(cv, (20, 15), image=maliang.PhotoImage(file="./EECT_icon.png").resize(60, 60))
     About_title = maliang.Text(cv, (20, 20), text="EECT", fontsize=40)
-    About_text = maliang.Text(cv, (20, 100), text=f"Version: {check_version(1)}\nVersion code: {check_version(0)}\nCore: {core.version()} (Build: {core.build_version()})")
+    About_text = maliang.UnderlineButton(cv, (20, 100), text=f"Version: {check_version(1)}\nVersion code: {check_version(0)}\nCore: {core.version()} (Build: {core.build_version()})", command=EGGHUNT.LyangThirteenYearsOld)
     update = maliang.Button(cv, (20, 195), text="检查更新", command=about.pull_up_the_update)
     # EECT__update = maliang.Button(cv, (20, 225), text="启动“EECT更新组件”", command=update_exe)
 
