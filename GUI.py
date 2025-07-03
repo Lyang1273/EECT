@@ -62,8 +62,8 @@ def main_window():
     root.mainloop()
 
 
-def menu_bar(cv, cv2, window):
-    menu = maliang.SegmentedButton(cv, (0, 0), text=("定时关机               ", "Windows 工具      ", "修改任务栏            ", "系统信息               ", "软件推荐               "), layout="vertical", default=0, command=lambda i: menu_controls(menu.get(), cv2))
+def menu_bar(cv, cv2, window):  # "软件推荐               ")
+    menu = maliang.SegmentedButton(cv, (0, 0), text=("定时关机               ", "Windows 工具      ", "修改任务栏            ", "系统信息               "), layout="vertical", default=0, command=lambda i: menu_controls(menu.get(), cv2))
     about_button = maliang.Button(cv, (0, 358), text="            关于            ", command=lambda: About(cv2))
     settings_button = maliang.Button(cv, (0, 400), text="            设置            ", command=lambda: settingsGUI.main_window(1, window))
 
