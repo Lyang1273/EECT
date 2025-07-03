@@ -56,7 +56,7 @@ if not core.version_verification(version):
     err.show_error(f"主程序版本过低，主程序不支持此核心，请 下载最新版本 的EECT解决此问题。\n主程序版本: {version}\n\n操作建议：下载最新版本的EECT、关闭程序。", 1)
     exit(1)
 
-
+"""
 # 检查更新
 try:
     ud_info = update.update()
@@ -96,7 +96,7 @@ except Exception as e:
         threaded=True,  # 启用后台线程
         icon_path="./img/EECT_logo.ico"
     )
-
+"""
 
 logger.info("core")
 core.mian()

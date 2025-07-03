@@ -20,3 +20,6 @@ UseRegistry = true
 [experimental]
 TitleBarFamousQuotes = false
 NoBetaWarner = true
+
+[EggHunt]
+EggHunt = true
