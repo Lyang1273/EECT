@@ -79,6 +79,11 @@ class Vote:
         exec(f'item_name{item_id} = maliang.InputBox(cv, position, placeholder=f"项{item_id}", size=(300, 50), fontsize=26)')
 
 
+class CloudControl:
+    def GetCloudControl(self):
+        pass
+
+
 if __name__ == "__main__":
     a = Weather()
     print(a.get_weather("柳州市"))
