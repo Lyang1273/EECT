@@ -124,8 +124,8 @@ def display_info():
 # -----名人名言-----
 
 def 名人名言():    # 欸我去，def居然惊现中文字符😱！！！
-    id = random.randint(1, 10)
     with open("./config/FamousQuotes.toml", 'rb') as f:
         famous_quotes = tomllib.load(f)
+        id = random.randint(1, len(famous_quotes))
     text = famous_quotes[str(id)]
     return text
