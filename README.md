@@ -48,5 +48,5 @@ EECT离不开以下开源项目的支持：
 **钉钉群：**[点击链接加入钉钉群](https://wx-in-i.dingtalk.com/invite-page/weixin.html?bizSource=____source____&corpId=dingbd24d409cc6dd087ffe93478753d9884&inviteCode=E2YIUn2ViwwDVEC&origin=9999&scene=PCContactInviteNew)  
 
 ## Other
-[反馈问题]{https://github.com/EECT/EECT/issues} | [参与开发（长期）](https://github.com/orgs/EECT/people)
+[反馈问题](https://github.com/EECT/EECT/issues) | [参与开发（长期）](https://github.com/orgs/EECT/people)
 <!--- Eraser file: https://app.eraser.io/workspace/JLMQfONupwbjFZZOMGp1 --->
