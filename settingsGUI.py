@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 from maliang import animation
 from loguru import logger
+import sys
 
 import core
 import settings
@@ -109,6 +110,7 @@ def settings_experimental(cv):
     maliang.Text(cv, (100, 130), text="关闭测试版提醒弹窗")
 
     config_file_info = maliang.Button(cv, (20, 280), text="配置文件", command=config_file)
+    maliang.Button(cv, (20, 330), text="强制退出", command=lambda: sys.exit(1))
 
 
 def setting_extend(cv):

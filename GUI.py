@@ -3,6 +3,7 @@ from maliang import animation, theme
 from loguru import logger
 import os
 import webbrowser
+import sys
 
 import shutdown
 import reg
@@ -45,6 +46,7 @@ def main_window():
     theme.set_color_mode(settings.get_color_mode())
     logger.info("创建窗口 root")
     root = maliang.Tk(size=(750, 450), icon="./img/EECT_logo.ico")
+    root.at_exit(lambda: sys.exit(0))
     root.center()
     root_cv = maliang.Canvas(root, auto_zoom=False)
     menu_cv = maliang.Canvas(root, auto_zoom=False)
@@ -63,7 +65,7 @@ def main_window():
 
 
 def menu_bar(cv, cv2, window):  # "软件推荐               "
-    menu = maliang.SegmentedButton(cv, (0, 0), text=("定时关机               ", "Windows 工具      ", "修改任务栏            ", "系统信息               "), layout="vertical", default=0, command=lambda i: menu_controls(menu.get(), cv2))
+    menu = maliang.SegmentedButton(cv, (0, 0), text=("定时关机               ", "Windows 工具      ", "修改任务栏            ", "系统信息               ", "软件推荐               "), layout="vertical", default=0, command=lambda i: menu_controls(menu.get(), cv2))
     about_button = maliang.Button(cv, (0, 358), text="            关于            ", command=lambda: About(cv2))
     settings_button = maliang.Button(cv, (0, 400), text="            设置            ", command=lambda: settingsGUI.main_window(1, window))
 
@@ -77,8 +79,8 @@ def About(cv):
     
     # EECT_logo = maliang.Image(cv, (20, 15), image=maliang.PhotoImage(file="./EECT_icon.png").resize(60, 60))
     About_title = maliang.Text(cv, (20, 20), text="EECT", fontsize=40)
-    About_text = maliang.UnderlineButton(cv, (20, 100), text=f"Version: {check_version(1)}\nVersion code: {check_version(0)}\nCore: {core.version()} (Build: {core.build_version()})", command=EGGHUNT.LyangThirteenYearsOld)
-    update = maliang.Button(cv, (20, 195), text="检查更新", command=about.pull_up_the_update)
+    About_text = maliang.UnderlineButton(cv, (20, 100), text=f"Version: {check_version(1)}\nVersion code: {check_version(0)}\nWorkflows: {check_version(2)}\nCore: {core.version()} (Build: {core.build_version()})", command=EGGHUNT.LyangThirteenYearsOld)
+    update = maliang.Button(cv, (20, 250), text="检查更新", command=about.pull_up_the_update)
     # EECT__update = maliang.Button(cv, (20, 225), text="启动“EECT更新组件”", command=update_exe)
 
     About_sidebar_text = maliang.Text(cv, (400, 20), text="更多信息∨", fontsize=20)

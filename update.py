@@ -93,8 +93,11 @@ def check_version(value):  # 检查当前程序版本
         version_data = tomllib.load(f)
         current_version = version_data['version']
         version_code = version_data['version_code']
+        workflows = version_data['workflows']
         if value == 1:
             return current_version
+        elif value == 2:
+            return workflows
         else:
             return version_code
 

@@ -7,10 +7,20 @@ import ctypes
 
 # noinspection PyMethodMayBeStatic
 class Main:
+    def AIWB_Illustrate(self, cv):
+        illustrate_cv = maliang.Canvas(cv)
+        illustrate_cv.place(width=400, height=250, x=60, y=120)
+
+        illustrate_cv.create_rectangle(0, 0, 400, 250, outline="grey", width=5)
+        close = maliang.Button(illustrate_cv, (200, 215), text="确 定", anchor="center", command=lambda: illustrate_cv.destroy())
+        maliang.Text(illustrate_cv, (20, 20), text="此处未列出在AIWB上标记为“停更”的\n软件，但一些带有“🥇”“🥈”“🌟”\n“🔴”标记的已停更软件仍会列出。")
+
     def AIWB(self, cv):
+        aiwb_illustrate = Main()
         cv.clear()
         cv.place(width=650, height=450)
 
+        tip = maliang.UnderlineButton(cv, (400, 10), text="关于未列出的软件……", fontsize=14, command=lambda: aiwb_illustrate.AIWB_Illustrate(cv))
         maliang.Text(cv, (20, 10), text="屏幕批注与白板软件", fontsize=26)
         InkCanvas = maliang.IconButton(cv, (10, 60), text="Ink Canvas", image=maliang.PhotoImage(file="./img/SoftWareREC/AIWB/InkCanvas.png").resize(32, 32))
         InkCanvasPlus = maliang.IconButton(cv, (170, 60), text="Ink Canvas Plus", image=maliang.PhotoImage(file="./img/SoftWareREC/AIWB/InkCanvasPlus.png").resize(32, 32))
