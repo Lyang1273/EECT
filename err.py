@@ -34,6 +34,27 @@ def show_error(message, level):
     error.mainloop()
 
 
+def FatalError(message):
+    """显示错误信息"""
+    logger.error("调用函数 FatalError")
+    winsound.PlaySound("C:\\Windows\\Media\\Windows Foreground.wav", winsound.SND_ASYNC)  # 播放提示音
+    error = maliang.Tk(size=(600, 400), icon="./img/EECT_logo.ico")
+    error.center()
+    error.title("EECT错误")
+    error.resizable(False, False)
+    theme.customize_window(error, disable_maximize_button=True, disable_minimize_button=True)
+    error.topmost(True)
+
+    error_cv = maliang.Canvas(error, auto_zoom=False)
+    error_cv.place(width=600, height=400)
+    error_title = maliang.Text(error_cv, (70, 10), text="一个非常严重的错误阻碍了EECT的正常运行。", fontsize=24)
+    error_text = maliang.Text(error_cv, (5, 60), text=message, fontsize=14, family="Microsoft Yahei UI")
+    tips = maliang.Text(error_cv, (5, 300), text="请尝试重新启动程序或者忽略错误，当然建议直接关闭程序或重新启动程序。", fontsize=16)
+    ignore = maliang.Button(error_cv, (280, 350), text="忽略错误", command=lambda: error.destroy())
+    issue = maliang.Button(error_cv, (390, 350), text="反馈问题", command=lambda: webbrowser.open_new("https://github.com/EECT/EECT/issues"))
+    close = maliang.Button(error_cv, (500, 350), text="关闭程序", command=lambda: exit(1))
+
+
 if __name__ == "__main__":
     show_error("这是一个错误信息", 0)
     show_error("这是一个严重错误信息", 1)

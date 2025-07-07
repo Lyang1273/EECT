@@ -4,6 +4,7 @@ from loguru import logger
 import os
 import webbrowser
 import sys
+import traceback
 
 import shutdown
 import reg
@@ -15,6 +16,7 @@ import dialog
 import core
 import software_rec
 import corelib
+import err
 
 SWREC = software_rec.Main()
 EGGHUNT = corelib.EggHunt()
@@ -29,17 +31,20 @@ except Exception:
 
 
 def menu_controls(value, cv):
-    match value:
-        case 0:
-            auto_shutdown(cv)
-        case 1:
-            win_tools(cv)
-        case 2:
-            taskbar(cv)
-        case 3:
-            system_info(cv)
-        case 4:
-            software_REC(cv)
+    try:
+        match value:
+            case 0:
+                auto_shutdown(cv)
+            case 1:
+                win_tools(cv)
+            case 2:
+                taskbar(cv)
+            case 3:
+                system_info(cv)
+            case 4:
+                software_REC(cv)
+    except Exception:
+        err.FatalError(traceback.format_exc())
 
 
 def main_window():
