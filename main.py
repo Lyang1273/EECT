@@ -97,6 +97,6 @@ except Exception as e:
         icon_path="./img/EECT_logo.ico"
     )
 """
-while True:
-    logger.info("core")
-    core.mian()
+
+logger.info("core")
+core.mian()
